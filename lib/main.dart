@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:send_money/core/di/injection.dart';
 
 import 'app/router/app_router.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  initDependencies();
   runApp(const MyApp());
 }
 
