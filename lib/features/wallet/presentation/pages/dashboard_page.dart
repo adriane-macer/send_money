@@ -24,9 +24,7 @@ class DashboardPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                context
-                    .read<AuthCubit>()
-                    .logout();
+                context.read<AuthCubit>().logout();
               },
               child: const Text('Logout'),
             ),
@@ -34,27 +32,20 @@ class DashboardPage extends StatelessWidget {
         ),
         body: BlocProvider(
           create: (context) => sl<WalletCubit>(),
-          child: BlocBuilder<
-              WalletCubit,
-              WalletState>(
+          child: BlocBuilder<WalletCubit, WalletState>(
             builder: (context, state) {
-              final balanceText =
-              state.isBalanceVisible
+              final balanceText = state.isBalanceVisible
                   ? '₱${state.balance.toStringAsFixed(2)}'
                   : '******';
 
               return Padding(
-                padding:
-                const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'Wallet Balance',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: TextStyle(fontSize: 18),
                     ),
                     const SizedBox(height: 12),
                     Row(
@@ -62,29 +53,39 @@ class DashboardPage extends StatelessWidget {
                       children: [
                         Text(
                           balanceText,
-                          style:
-                          const TextStyle(
+                          style: const TextStyle(
                             fontSize: 32,
-                            fontWeight:
-                            FontWeight.bold,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         IconButton(
                           icon: Icon(
-                            state
-                                .isBalanceVisible
+                            state.isBalanceVisible
                                 ? Icons.visibility
-                                : Icons
-                                .visibility_off,
+                                : Icons.visibility_off,
                           ),
                           onPressed: () {
                             context
-                                .read<
-                                WalletCubit>()
+                                .read<WalletCubit>()
                                 .toggleBalanceVisibility();
                           },
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 32),
+
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          context.go(
+                            RoutePaths.sendMoney,
+                          );
+                        },
+                        child: const Text(
+                          'Send Money',
+                        ),
+                      ),
                     ),
                   ],
                 ),
