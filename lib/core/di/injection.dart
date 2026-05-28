@@ -8,6 +8,12 @@ import 'package:send_money/features/send_money/data/repositories/send_money_repo
 import 'package:send_money/features/send_money/domain/repositories/send_money_repository.dart';
 import 'package:send_money/features/send_money/domain/usecases/send_money_usecase.dart';
 import 'package:send_money/features/send_money/presentation/cubit/send_money_cubit.dart';
+import 'package:send_money/features/transactions/data/datasources/transaction_remote_datasource.dart';
+import 'package:send_money/features/transactions/data/datasources/transaction_remote_datasource_impl.dart';
+import 'package:send_money/features/transactions/data/repositories/transaction_repository_impl.dart';
+import 'package:send_money/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:send_money/features/transactions/domain/usecases/get_transactions_usecase.dart';
+import 'package:send_money/features/transactions/presentation/cubit/transaction_cubit.dart';
 import 'package:send_money/features/wallet/presentation/cubit/wallet_cubit.dart';
 
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
@@ -43,4 +49,16 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton(() => SendMoneyUseCase(sl()));
 
   sl.registerFactory(() => SendMoneyCubit(sendMoneyUseCase: sl()));
+
+  sl.registerLazySingleton<TransactionRemoteDataSource>(
+    () => TransactionRemoteDataSourceImpl(sl()),
+  );
+
+  sl.registerLazySingleton<TransactionRepository>(
+    () => TransactionRepositoryImpl(sl()),
+  );
+
+  sl.registerLazySingleton(() => GetTransactionsUseCase(sl()));
+
+  sl.registerFactory(() => TransactionCubit(sl()));
 }
