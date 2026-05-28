@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:send_money/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:send_money/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:send_money/features/wallet/presentation/cubit/wallet_cubit.dart';
 
 import '../../features/auth/data/repositories/auth_repository_impl.dart';
@@ -22,4 +24,14 @@ Future<void> initDependencies() async {
   );
 
   sl.registerFactory(()=> WalletCubit());
+
+  sl.registerLazySingleton(
+        () => LogoutUseCase(sl()),
+  );
+
+  sl.registerFactory(
+        () => AuthCubit(
+      logoutUseCase: sl(),
+    ),
+  );
 }

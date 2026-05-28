@@ -13,4 +13,12 @@ class AuthRepositoryImpl implements AuthRepository {
     return username == 'admin' &&
         password == '1234';
   }
+
+  @override
+  @override
+  Future<void> logout() async {
+    await Future.delayed(
+      const Duration(milliseconds: 300),
+    );
+  }
 }
