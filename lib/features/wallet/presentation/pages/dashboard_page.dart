@@ -12,61 +12,65 @@ class DashboardPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
-      body: BlocBuilder<
-          WalletCubit,
-          WalletState>(
-        builder: (context, state) {
-          final balanceText =
-          state.isBalanceVisible
-              ? '₱${state.balance.toStringAsFixed(2)}'
-              : '******';
+      body: BlocProvider(
+        create: (context) => WalletCubit(),
+        child: BlocBuilder<
+            WalletCubit,
+            WalletState>(
+          builder: (context, state) {
+            final balanceText =
+            state.isBalanceVisible
+                ? '₱${state.balance.toStringAsFixed(2)}'
+                : '******';
 
-          return Padding(
-            padding:
-            const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Wallet Balance',
-                  style: TextStyle(
-                    fontSize: 18,
+            return Padding(
+              padding:
+              const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Wallet Balance',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Text(
-                      balanceText,
-                      style:
-                      const TextStyle(
-                        fontSize: 32,
-                        fontWeight:
-                        FontWeight.bold,
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        balanceText,
+                        style:
+                        const TextStyle(
+                          fontSize: 32,
+                          fontWeight:
+                          FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        state
-                            .isBalanceVisible
-                            ? Icons.visibility
-                            : Icons
-                            .visibility_off,
+                      IconButton(
+                        icon: Icon(
+                          state
+                              .isBalanceVisible
+                              ? Icons.visibility
+                              : Icons
+                              .visibility_off,
+                        ),
+                        onPressed: () {
+                          context
+                              .read<
+                              WalletCubit>()
+                              .toggleBalanceVisibility();
+                        },
                       ),
-                      onPressed: () {
-                        context
-                            .read<
-                            WalletCubit>()
-                            .toggleBalanceVisibility();
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
