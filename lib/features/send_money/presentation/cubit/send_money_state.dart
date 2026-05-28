@@ -21,3 +21,21 @@ final class SendMoneyValidationError extends SendMoneyState {
   @override
   List<Object?> get props => [message];
 }
+
+final class SendMoneyLoading
+    extends SendMoneyState {}
+
+final class SendMoneySuccess
+    extends SendMoneyState {}
+
+final class SendMoneyFailure
+    extends SendMoneyState {
+  final String message;
+
+  const SendMoneyFailure(
+      this.message,
+      );
+
+  @override
+  List<Object?> get props => [message];
+}

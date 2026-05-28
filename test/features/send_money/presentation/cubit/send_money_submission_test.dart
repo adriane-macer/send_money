@@ -2,10 +2,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'package:send_money_app/features/send_money/domain/usecases/send_money_usecase.dart';
+import 'package:send_money/features/send_money/domain/usecases/send_money_usecase.dart';
 
-import 'package:send_money_app/features/send_money/presentation/cubit/send_money_cubit.dart';
-import 'package:send_money_app/features/send_money/presentation/cubit/send_money_state.dart';
+import 'package:send_money/features/send_money/presentation/cubit/send_money_cubit.dart';
 
 class MockSendMoneyUseCase extends Mock implements SendMoneyUseCase {}
 
