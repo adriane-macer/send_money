@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:send_money/features/send_money/presentation/cubit/send_money_cubit.dart';
-import 'package:send_money/features/send_money/presentation/cubit/send_money_state.dart';
 
 void main() {
   late SendMoneyCubit cubit;
