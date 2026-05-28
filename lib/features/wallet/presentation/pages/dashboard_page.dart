@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:send_money/features/auth/presentation/cubit/auth_cubit.dart';
 
 import '../cubit/wallet_cubit.dart';
 
@@ -11,6 +12,16 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context
+                  .read<AuthCubit>()
+                  .logout();
+            },
+            child: const Text('Logout'),
+          ),
+        ],
       ),
       body: BlocProvider(
         create: (context) => WalletCubit(),
