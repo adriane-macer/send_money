@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:send_money/app/router/route_paths.dart';
+import 'package:send_money/core/di/injection.dart';
 import 'package:send_money/features/auth/presentation/cubit/auth_cubit.dart';
 
 import '../cubit/wallet_cubit.dart';
@@ -32,7 +33,7 @@ class DashboardPage extends StatelessWidget {
           ],
         ),
         body: BlocProvider(
-          create: (context) => WalletCubit(),
+          create: (context) => sl<WalletCubit>(),
           child: BlocBuilder<
               WalletCubit,
               WalletState>(

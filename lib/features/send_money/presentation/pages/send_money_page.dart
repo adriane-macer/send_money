@@ -30,7 +30,39 @@ class _SendMoneyPageState
         child: BlocConsumer<
             SendMoneyCubit,
             SendMoneyState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is SendMoneySuccess) {
+              showModalBottomSheet(
+                context: context,
+                builder: (_) {
+                  return const SizedBox(
+                    height: 200,
+                    child: Center(
+                      child: Text(
+                        'Money Sent Successfully',
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+
+            if (state is SendMoneyFailure) {
+              showModalBottomSheet(
+                context: context,
+                builder: (_) {
+                  return SizedBox(
+                    height: 200,
+                    child: Center(
+                      child: Text(
+                        state.message,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          },
           builder: (context, state) {
             String? errorText;
 
@@ -63,17 +95,33 @@ class _SendMoneyPageState
                 const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<
-                        SendMoneyCubit>()
-                        .validateAmount(
-                      amountController
-                          .text,
+                    final amount = double.tryParse(
+                      amountController.text,
                     );
+
+                    context
+                        .read<SendMoneyCubit>()
+                        .validateAmount(
+                      amountController.text,
+                    );
+
+                    final currentState =
+                        context
+                            .read<SendMoneyCubit>()
+                            .state;
+
+                    if (currentState
+                    is SendMoneyValid) {
+                      context
+                          .read<SendMoneyCubit>()
+                          .submitMoney(
+                        amount!,
+                      );
+                    }
                   },
-                  child: const Text(
-                    'Submit',
-                  ),
+                  child: state is SendMoneyLoading
+                      ? const CircularProgressIndicator()
+                      : const Text('Submit'),
                 ),
               ],
             );
