@@ -10,7 +10,7 @@ import 'package:send_money/features/wallet/presentation/cubit/wallet_cubit.dart'
 import 'package:send_money/features/wallet/presentation/pages/dashboard_page.dart';
 
 void main() {
-  setUpAll(()async{
+  setUpAll(() async {
     await initDependencies();
   });
 
@@ -32,7 +32,10 @@ void main() {
       ],
     );
 
-    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+    await tester.pumpWidget(BlocProvider(
+      create: (context) => sl<AuthCubit>(),
+      child: MaterialApp.router(routerConfig: router),
+    ));
 
     expect(find.text('View Transactions'), findsOneWidget);
   });
@@ -45,7 +48,7 @@ void main() {
           path: '/',
           builder: (_, __) =>
               BlocProvider(
-                create: (_) => WalletCubit(),
+                create: (_) => sl<WalletCubit>(),
                 child: const DashboardPage(),
               ),
         ),
