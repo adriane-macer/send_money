@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:send_money/core/di/injection.dart';
+import 'package:send_money/features/auth/presentation/cubit/auth_cubit.dart';
 
 import 'app/router/app_router.dart';
 
@@ -14,8 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppRouter.router,
+    return BlocProvider(
+      create: (context) => sl<AuthCubit>(),
+      child: MaterialApp.router(
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }
