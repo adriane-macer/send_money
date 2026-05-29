@@ -7,7 +7,8 @@ import 'app/router/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initDependencies();
+  // Await the dependency injection initialization to ensure all services are ready.
+  await initDependencies();
   runApp(const MyApp());
 }
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<AuthCubit>(),
       child: MaterialApp.router(
+        title: 'Send Money',
+        debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
       ),
     );
