@@ -158,6 +158,8 @@ Simpler than Bloc for small-medium state handling.
 Simple dependency injection.
 
 # Future Improvements
+- Themes
+- Typography
 - Offline support
 - Local database caching
 - Pagination
