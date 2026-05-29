@@ -164,5 +164,7 @@ Simple dependency injection.
 - Token authentication
 - Real backend integration
 
+[Class Diagram](class_diagram.md)
+[Design Document](design_document.md)
 
 
