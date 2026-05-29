@@ -78,7 +78,7 @@ class DashboardPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          context.go(RoutePaths.sendMoney);
+                          context.go(RoutePaths.dashboard + RoutePaths.transactions);
                         },
                         child: const Text('Send Money'),
                       ),
@@ -89,7 +89,7 @@ class DashboardPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          context.go(RoutePaths.transactions);
+                          context.go(RoutePaths.dashboard + RoutePaths.transactions);
                         },
                         child: const Text('View Transactions'),
                       ),

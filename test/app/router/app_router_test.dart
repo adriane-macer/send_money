@@ -24,7 +24,7 @@ void main() {
 
   test('send money route should exist', () {
     final match = router.configuration.findMatch(
-      Uri.parse(RoutePaths.sendMoney),
+      Uri.parse(RoutePaths.dashboard + RoutePaths.sendMoney),
     );
 
     expect(match.matches.isNotEmpty, true);
@@ -32,7 +32,7 @@ void main() {
 
   test('transactions route should exist', () {
     final match = router.configuration.findMatch(
-      Uri.parse(RoutePaths.transactions),
+      Uri.parse(RoutePaths.dashboard + RoutePaths.transactions),
     );
 
     expect(match.matches.isNotEmpty, true);

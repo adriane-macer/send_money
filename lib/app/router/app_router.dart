@@ -21,16 +21,18 @@ class AppRouter {
         path: RoutePaths.dashboard,
         name: RouteNames.dashboard,
         builder: (_, __) => const DashboardPage(),
-      ),
-      GoRoute(
-        path: RoutePaths.sendMoney,
-        name: RouteNames.sendMoney,
-        builder: (_, __) => const SendMoneyPage(),
-      ),
-      GoRoute(
-        path: RoutePaths.transactions,
-        name: RouteNames.transactions,
-        builder: (_, __) => const TransactionsPage(),
+        routes: [
+          GoRoute(
+            path: RoutePaths.sendMoney,
+            name: RouteNames.sendMoney,
+            builder: (_, __) => const SendMoneyPage(),
+          ),
+          GoRoute(
+            path: RoutePaths.transactions,
+            name: RouteNames.transactions,
+            builder: (_, __) => const TransactionsPage(),
+          ),
+        ]
       ),
     ],
   );
